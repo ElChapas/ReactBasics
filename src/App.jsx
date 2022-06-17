@@ -30,15 +30,19 @@ function App() {
         localStorage.setItem("tasks", JSON.stringify(tasksItems));
     }, [tasksItems]);
 
+    const clearTasksCompleted = () => {
+        setTasksItems(tasksItems.filter((t) => t.done === false));
+        setShowCompleted(false);
+    };
+
     return (
         <div className="App">
             <TaskCreator createNewTask={createNewTask} />
             <TasksList tasksItems={tasksItems} toggleTask={toggleTask} isChecked={false} />
-            <input id="show-completed" type="checkbox" onChange={(e) => setShowCompleted(!showCompleted)}/>
+            <input id="show-completed" type="checkbox" checked={showCompleted} onChange={(e) => setShowCompleted(!showCompleted)} />
             <label htmlFor="show-completed">Show Completed Tasks</label>
-            {showCompleted && (
-                <TasksList tasksItems={tasksItems} toggleTask={toggleTask} isChecked={true} />
-            )}
+            <button onClick={clearTasksCompleted}>Clear</button>
+            {showCompleted && <TasksList tasksItems={tasksItems} toggleTask={toggleTask} isChecked={true} />}
         </div>
     );
 }
