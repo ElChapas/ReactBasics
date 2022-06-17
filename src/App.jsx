@@ -10,8 +10,12 @@ function App() {
         // console.log("Saved. Task: ", newTaskName);
         if (!tasksItems.find((task) => task.name === newTaskName)) {
             setTasksItems([...tasksItems, { name: newTaskName, done: false }]);
-            console.log("Tasks: ", tasksItems);
+            // console.log("Tasks: ", tasksItems);
         }
+    };
+
+    const toggleTask = (task) => {
+        setTasksItems(tasksItems.map(t => t.name === task.name ? {...t, done: !t.done} : t))
     };
 
     useEffect(() => {
@@ -28,7 +32,7 @@ function App() {
     return (
         <div className="App">
             <TaskCreator createNewTask={createNewTask} />
-            <TasksList tasksItems={tasksItems} />
+            <TasksList tasksItems={tasksItems} toggleTask={toggleTask} />
         </div>
     );
 }

@@ -1,6 +1,10 @@
 import React from "react";
 
 const TasksList = (props) => {
+    const handleToggle = (task) => {
+        props.toggleTask(task);
+    };
+
     return (
         <div>
             <table>
@@ -14,7 +18,7 @@ const TasksList = (props) => {
                     {props.tasksItems.map((task, index) => (
                         <tr key={index}>
                             <td>{task.name}</td>
-                            <td>{task.done ? "Done" : "Not done"}</td>
+                            <td>{<input type="checkbox" defaultChecked={task.done} onChange={() => handleToggle(task)}></input>}</td>
                         </tr>
                     ))}
                 </tbody>
