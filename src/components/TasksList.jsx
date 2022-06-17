@@ -1,8 +1,16 @@
 import React from "react";
 
-const TasksList = (props) => {
-    const handleToggle = (task) => {
-        props.toggleTask(task);
+const TasksList = ({ tasksItems, isChecked, toggleTask }) => {
+
+    const tableBody = () => {
+        return (tasksItems
+            .filter((task) => task.done === isChecked)
+            .map((task) => (
+                <tr key={task.name}>
+                    <td>{task.name}</td>
+                    <td>{<input type="checkbox" defaultChecked={task.done} onChange={() => toggleTask(task)}></input>}</td>
+                </tr>
+            )));
     };
 
     return (
@@ -14,14 +22,7 @@ const TasksList = (props) => {
                         <th>Value</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {props.tasksItems.map((task, index) => (
-                        <tr key={index}>
-                            <td>{task.name}</td>
-                            <td>{<input type="checkbox" defaultChecked={task.done} onChange={() => handleToggle(task)}></input>}</td>
-                        </tr>
-                    ))}
-                </tbody>
+                <tbody>{tableBody()}</tbody>
             </table>
         </div>
     );
