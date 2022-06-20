@@ -8,18 +8,18 @@ const TasksList = ({ tasksItems, isChecked, toggleTask }) => {
             .map((task) => (
                 <tr key={task.name}>
                     <td>{task.name}</td>
-                    <td>{<input type="checkbox" defaultChecked={task.done} onChange={() => toggleTask(task)}></input>}</td>
+                    <td>{<input type="checkbox" className="" defaultChecked={task.done} onChange={() => toggleTask(task)}></input>}</td>
                 </tr>
             )));
     };
 
     return (
         <div>
-            <table>
+            <table className="table table-dark table-striped table-bordered table-secondary m-2">
                 <thead>
                     <tr>
                         <th>Tasks</th>
-                        <th>Value</th>
+                        <th>Option</th>
                     </tr>
                 </thead>
                 <tbody>{tableBody()}</tbody>

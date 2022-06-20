@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./App.css";
 import TaskCreator from "./components/taskCreator";
 import TasksList from "./components/TasksList";
 
@@ -36,14 +35,18 @@ function App() {
     };
 
     return (
-        <div className="App">
-            <TaskCreator createNewTask={createNewTask} />
-            <TasksList tasksItems={tasksItems} toggleTask={toggleTask} isChecked={false} />
-            <input id="show-completed" type="checkbox" checked={showCompleted} onChange={(e) => setShowCompleted(!showCompleted)} />
-            <label htmlFor="show-completed">Show Completed Tasks</label>
-            <button onClick={clearTasksCompleted}>Clear</button>
-            {showCompleted && <TasksList tasksItems={tasksItems} toggleTask={toggleTask} isChecked={true} />}
-        </div>
+        <main className="bg-dark vh-100 text-white">
+            <div className="container col-md-4 offset-md-4">
+                <TaskCreator createNewTask={createNewTask} />
+                <TasksList tasksItems={tasksItems} toggleTask={toggleTask} isChecked={false} />
+                <div className="d-flex align-items-center form-check form-switch ">
+                    <input role="switch" className="form-check-input" id="show-completed" type="checkbox" checked={showCompleted} onChange={(e) => setShowCompleted(!showCompleted)} />
+                    <label className="m-1 flex-fill" htmlFor="show-completed">Show Completed Tasks</label>
+                    <button className="btn btn-danger flex-fill" onClick={clearTasksCompleted}>Clear</button>
+                </div>
+                {showCompleted && <TasksList tasksItems={tasksItems} toggleTask={toggleTask} isChecked={true} />}
+            </div>
+        </main>
     );
 }
 
